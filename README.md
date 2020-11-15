@@ -13,12 +13,11 @@ A widgets library for Flutter.
 
 - Provider (https://pub.dev/packages/provider).
 
-#
+# Examples
 
-## Examples
+## Floating Drawer
 
-### Floating Drawer
-<code>
+```dart
 import 'package:essential_widgets/widgets/floatingDrawer.dart';
 import 'package:flutter/material.dart';
 
@@ -72,11 +71,105 @@ class FloatingDrawerPage extends StatelessWidget {
     );
   }
 }
-</code>
-<img src=""></img>
 
-### Multi Fab
+```
 
-### Shadowed
+<div style='display:flex; width:100%; justify-content:space-around; margin-bottom:50px'>
+    <img src="https://drive.google.com/uc?export=view&id=1zeqQTNLgtlqmTazY4CDGkYowXkpD7K49"></img>
+    <img src="https://drive.google.com/uc?export=view&id=1fl4drfZiQSzskUZKIlYep6R7DvnAIyR-"></img>
+</div>
 
-### Slideshow
+## Multi Fab
+```dart
+import 'package:essential_widgets/widgets/multiFab.dart';
+import 'package:flutter/material.dart';
+
+class MultiFabPage extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+        body: Center(
+          child: Text('Hola Mundo'),
+        ),
+        floatingActionButton: MultiFab(
+          children: [
+            ...List.generate(
+                3,
+                (i) => MultiFabItem(
+                      onPressed: () {},
+                      child: Text("$i"),
+                    ))
+          ],
+        ));
+  }
+}
+
+```
+<div style='display:flex; width:100%; justify-content:space-around; margin-bottom:50px'>
+    <img src="https://drive.google.com/uc?export=view&id=1bqzoO_AifNwPDZ2djn5H5SdjnSYMIgBB"></img>
+    <img src="https://drive.google.com/uc?export=view&id=1jknYxL48MLZcBsjyYr0dWoECFJvQo1Iz"></img>
+</div>
+
+## Shadowed
+```dart
+import 'package:essential_widgets/widgets/shadowed.dart';
+import 'package:flutter/material.dart';
+
+class ShadowedPage extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Center(
+        child: Shadowed(
+          child: Text(
+            'Hola Mundo',
+            style: TextStyle(fontSize: 30),
+          ),
+          blurLevel: 1.5,
+          distance: 3,
+          shadowColor: Colors.black45,
+        ),
+      ),
+    );
+  }
+}
+```
+<div style='display:flex; width:100%; justify-content:space-around; margin-bottom:50px'>
+    <img src="https://drive.google.com/uc?export=view&id=1MzVx5Ns0-SZ7ieQ3oIEsjKtfqq_NCBcd"></img>
+</div>
+
+## Slideshow
+```dart
+import 'package:essential_widgets/widgets/slideshow.dart';
+import 'package:flutter/material.dart';
+
+class SlideshowPage extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Center(
+        child: Slideshow(
+          slides: [
+            ...List.generate(
+              3,
+              (i) => Container(
+                alignment: Alignment.center,
+                child: Text(
+                  "$i",
+                  style: TextStyle(fontSize: 35, color: Colors.white),
+                ),
+                decoration: BoxDecoration(
+                    color: Colors.blueGrey[400],
+                    borderRadius: BorderRadius.circular(25)),
+              ),
+            )
+          ],
+        ),
+      ),
+    );
+  }
+}
+```
+<div style='display:flex; width:100%; justify-content:space-around; margin-bottom:50px'>
+    <img src="https://drive.google.com/uc?export=view&id=126gPS16XAhhN0wlTsVLMarlfLmmnCi0W"></img>
+</div>
