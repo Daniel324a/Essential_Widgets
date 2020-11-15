@@ -22,7 +22,6 @@ class Shadowed extends StatelessWidget {
 
     return ClipRRect(
       child: Container(
-        color: Colors.red,
         child: Stack(
           children: [
             _Shadow(

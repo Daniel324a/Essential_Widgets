@@ -6,12 +6,13 @@ Size buttonSize;
 Offset buttonPosition;
 
 class MultiFab extends StatefulWidget {
-  final Widget unfoldedIcon, foldedIcon;
+  final Widget unfoldedIcon, foldedIcon, customIcon;
   final List<MultiFabItem> children;
   final ShapeBorder shape;
   final Duration animationDuration;
   final String tooltip;
   final Color color;
+  final Function onTap;
 
   MultiFab({
     @required this.children,
@@ -20,6 +21,8 @@ class MultiFab extends StatefulWidget {
     this.shape = const CircleBorder(),
     this.animationDuration = const Duration(milliseconds: 400),
     this.color = Colors.blue,
+    this.onTap,
+    this.customIcon,
     this.tooltip,
   });
 
@@ -82,11 +85,18 @@ class _MultiFabState extends State<MultiFab> {
         onPressed: () {},
         child: InkWell(
             borderRadius: BorderRadius.circular(100),
-            onTap: () => isMenuOpen ? closeMenu() : openMenu(),
+            onTap: () {
+              if (widget.onTap != null) widget.onTap();
+              isMenuOpen ? closeMenu() : openMenu();
+            },
             child: Container(
               width: double.infinity,
               height: double.infinity,
-              child: isMenuOpen ? widget.unfoldedIcon : widget.foldedIcon,
+              child: widget.customIcon != null
+                  ? widget.customIcon
+                  : isMenuOpen
+                      ? widget.unfoldedIcon
+                      : widget.foldedIcon,
             )),
       );
 }
