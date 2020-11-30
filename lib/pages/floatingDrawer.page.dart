@@ -33,20 +33,30 @@ class FloatingDrawerPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: Container(
-          margin: EdgeInsets.all(10),
-          child: FloatingDrawer(
-            separator: Container(
-              width: double.infinity,
-              height: 1,
-              color: Colors.black12,
-            ),
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(15),
-            tiles: [...items],
-          ),
-        ),
+      appBar: AppBar(
+        actions: [
+          PopupMenuButton<String>(
+            color: Colors.transparent,
+            elevation: 0,
+            itemBuilder: (context) => [
+              PopupMenuItem(
+                child: Container(
+                  width: 300,
+                  child: FloatingDrawer(
+                    separator: Container(
+                      width: double.infinity,
+                      height: 1,
+                      color: Colors.black12,
+                    ),
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(15),
+                    tiles: [...items],
+                  ),
+                ),
+              )
+            ],
+          )
+        ],
       ),
     );
   }
