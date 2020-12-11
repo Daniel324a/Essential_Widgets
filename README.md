@@ -9,6 +9,7 @@ This package is a compilation of widgets maybe useful for some cases when the st
 - [Shadowed.](#shadowed)
 - [Slideshow.](#slideshow)
 - [Deployable.](#deployable)
+- [Blurred.](#blurred)
 
 ## Third party libraries
 
@@ -235,4 +236,33 @@ class DeployablePage extends StatelessWidget {
 <div style='display:flex; width:100%; justify-content:space-around; margin-bottom:50px'>
     <img src="https://drive.google.com/uc?export=view&id=1Gjs1rDPGdscr-laTT0fLVvZwb70riGe2"></img>
     <img src="https://drive.google.com/uc?export=view&id=1Oki_TiJEbR8l-9UgJKxq7ucc8usYeD3P"></img>
+</div>
+
+## Blurred
+```dart
+import 'package:essential_widgets/widgets/blurred.dart';
+import 'package:flutter/material.dart';
+
+class BlurredPage extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Center(
+        child: Blurred(
+          width: 200,
+          height: 200,
+          opacity: .1,
+          blur: 8,
+          accentColor: Colors.blueGrey,
+          boxDecoration: BoxDecoration(borderRadius: BorderRadius.circular(20)),
+          child: FlutterLogo(size: 100),
+        ),
+      ),
+    );
+  }
+}
+
+```
+<div style='display:flex; width:100%; justify-content:space-around; margin-bottom:50px'>
+    <img src="https://drive.google.com/uc?export=view&id=1NJT5OSUTzCJEp8f1NyaGQPmUeCQ3KQPq"></img>
 </div>
