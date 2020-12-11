@@ -1,17 +1,8 @@
-import 'package:essential_widgets/pages/blurred.page.dart';
-import 'package:flutter/material.dart';
+library essential_widgets;
 
-void main() => runApp(MyApp());
-
-class MyApp extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) => MaterialApp(
-        title: 'Essential Widgets',
-        debugShowCheckedModeBanner: false,
-        theme: ThemeData(
-          primarySwatch: Colors.blue,
-          visualDensity: VisualDensity.adaptivePlatformDensity,
-        ),
-        home: BlurredPage(),
-      );
-}
+export "widgets/blurred.dart";
+export "widgets/deployable.dart";
+export "widgets/floatingDrawer.dart";
+export "widgets/multiFab.dart";
+export "widgets/shadowed.dart";
+export "widgets/slideshow.dart";
