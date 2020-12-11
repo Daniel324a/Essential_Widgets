@@ -8,11 +8,23 @@ class DeployablePage extends StatelessWidget {
       body: Container(
         alignment: Alignment.centerRight,
         child: Stack(
-          alignment: Alignment.center,
+          alignment: Alignment.centerRight,
           children: [
+            SafeArea(
+              child: Container(
+                margin: EdgeInsets.all(10),
+                padding: EdgeInsets.all(10),
+                height: double.infinity,
+                width: double.infinity,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(20),
+                  color: Colors.blueGrey[100],
+                ),
+              ),
+            ),
             Deployable(
               child: Text(
-                "holaa",
+                "Hello World",
                 style: TextStyle(fontSize: 18),
               ),
             ),
