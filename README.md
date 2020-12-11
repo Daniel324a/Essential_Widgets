@@ -1,6 +1,6 @@
 # Essential Widgets
 
-A widgets library for Flutter.
+This package is a compilation of widgets maybe useful for some cases when the standard Flutter widgets fall short or we need a widget with a more specific function.
 
 ## Widgets
 
@@ -91,6 +91,7 @@ class FloatingDrawerPage extends StatelessWidget {
 </div>
 
 ## Multi Fab
+
 ```dart
 import 'package:essential_widgets/widgets/multiFab.dart';
 import 'package:flutter/material.dart';
@@ -116,12 +117,14 @@ class MultiFabPage extends StatelessWidget {
 }
 
 ```
+
 <div style='display:flex; width:100%; justify-content:space-around; margin-bottom:50px'>
     <img src="https://drive.google.com/uc?export=view&id=1bqzoO_AifNwPDZ2djn5H5SdjnSYMIgBB"></img>
     <img src="https://drive.google.com/uc?export=view&id=1jknYxL48MLZcBsjyYr0dWoECFJvQo1Iz"></img>
 </div>
 
 ## Shadowed
+
 ```dart
 import 'package:essential_widgets/widgets/shadowed.dart';
 import 'package:flutter/material.dart';
@@ -145,11 +148,13 @@ class ShadowedPage extends StatelessWidget {
   }
 }
 ```
+
 <div style='display:flex; width:100%; justify-content:space-around; margin-bottom:50px'>
     <img src="https://drive.google.com/uc?export=view&id=1MzVx5Ns0-SZ7ieQ3oIEsjKtfqq_NCBcd"></img>
 </div>
 
 ## Slideshow
+
 ```dart
 import 'package:essential_widgets/widgets/slideshow.dart';
 import 'package:flutter/material.dart';
@@ -181,11 +186,13 @@ class SlideshowPage extends StatelessWidget {
   }
 }
 ```
+
 <div style='display:flex; width:100%; justify-content:space-around; margin-bottom:50px'>
     <img src="https://drive.google.com/uc?export=view&id=126gPS16XAhhN0wlTsVLMarlfLmmnCi0W"></img>
 </div>
 
 ## Deployable
+
 ```dart
 import 'package:essential_widgets/widgets/deployable.dart';
 import 'package:flutter/material.dart';
@@ -224,6 +231,7 @@ class DeployablePage extends StatelessWidget {
   }
 }
 ```
+
 <div style='display:flex; width:100%; justify-content:space-around; margin-bottom:50px'>
     <img src="https://drive.google.com/uc?export=view&id=1Gjs1rDPGdscr-laTT0fLVvZwb70riGe2"></img>
     <img src="https://drive.google.com/uc?export=view&id=1Oki_TiJEbR8l-9UgJKxq7ucc8usYeD3P"></img>
