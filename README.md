@@ -10,6 +10,7 @@ This package is a compilation of widgets maybe useful for some cases when the st
 - [Slideshow.](#slideshow)
 - [Deployable.](#deployable)
 - [Blurred.](#blurred)
+- [Responsive.](#responsive)
 
 ## Third party libraries
 
@@ -239,6 +240,7 @@ class DeployablePage extends StatelessWidget {
 </div>
 
 ## Blurred
+
 ```dart
 import 'package:essential_widgets/widgets/blurred.dart';
 import 'package:flutter/material.dart';
@@ -263,6 +265,41 @@ class BlurredPage extends StatelessWidget {
 }
 
 ```
+
 <div style='display:flex; width:100%; justify-content:space-around; margin-bottom:50px'>
     <img src="https://drive.google.com/uc?export=view&id=1NJT5OSUTzCJEp8f1NyaGQPmUeCQ3KQPq"></img>
+</div>
+
+## Responsive
+
+* Factors define the values that determine the widget to use, by default are 200px and 800px respectively.
+```
+factors[0] -> sm
+factors[1] -> md
+```
+
+```dart
+import 'package:essential_widgets/widgets/responsive.dart';
+import 'package:flutter/material.dart';
+
+class ResponsivePage extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Center(
+        child: Responsive(
+          sm: Text("Small"),
+          md: Text("Medium"),
+          lg: Text("Large"),
+          factors: [220, 768],
+        ),
+      ),
+    );
+  }
+}
+
+```
+
+<div style='display:flex; width:100%; justify-content:space-around; margin-bottom:50px'>
+    <img src="https://drive.google.com/uc?export=view&id=1V3Py8t9TO68XFv3u1SJto4jMD3YuPodn"></img>
 </div>

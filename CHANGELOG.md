@@ -1,5 +1,5 @@
-version: 1.0.0+1
+version: 1.0.1+1
 
-## First Release
+## Update (12/26/2020)
 
-1. Added: FloatingDrawer, MultiFab, Shadowed, SlideShow, Deployable & Blurred Widgets.
+1. Added: Responsive Widget.
