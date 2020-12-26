@@ -1,5 +1,5 @@
-import 'package:essential_widgets/pages/blurred.page.dart';
 import 'package:flutter/material.dart';
+import 'pages/responsive.page.dart';
 
 void main() => runApp(MyApp());
 
@@ -12,6 +12,6 @@ class MyApp extends StatelessWidget {
           primarySwatch: Colors.blue,
           visualDensity: VisualDensity.adaptivePlatformDensity,
         ),
-        home: BlurredPage(),
+        home: ResponsivePage(),
       );
 }
