@@ -11,6 +11,9 @@ class Slideshow extends StatelessWidget {
   final BoxShape shape;
   final double dotsSize;
   final double secondaryDotsSize;
+  final double slidesPadding;
+  final Axis scrollDirection;
+  final bool showDots;
 
   //Constructor
   Slideshow({
@@ -22,46 +25,52 @@ class Slideshow extends StatelessWidget {
     this.shape = BoxShape.circle, //Shape of dots
     this.dotsSize = 12,
     this.secondaryDotsSize = 12,
+    this.slidesPadding = 30,
+    this.scrollDirection = Axis.horizontal,
+    this.showDots = true,
   });
 
   @override
-  Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-      create: (_) => new SliderModel(), //Instantiate the model in the widget
-      child: SafeArea(
-        child: Center(child: Builder(
-          builder: (BuildContext context) {
-            //Set Params and fix a Bug of the state, waiting for the update of the widget
-            Future.delayed(Duration(milliseconds: 0), () {
-              final ssModel = Provider.of<SliderModel>(context, listen: false);
-              ssModel.primaryColor = this.primaryColor;
-              ssModel.secondaryColor = this.secondaryColor;
-              ssModel.dotsSpace = this.dotsSpace;
-              ssModel.dotsSize = this.dotsSize;
-              ssModel.shape = this.shape;
-              ssModel.secondaryDotsSize = this.secondaryDotsSize;
-            });
+  Widget build(BuildContext context) => ChangeNotifierProvider(
+        create: (_) => new SliderModel(), //Instantiate the model in the widget
+        child: SafeArea(
+          child: Center(child: Builder(
+            builder: (BuildContext context) {
+              //Set Params and fix a Bug of the state, waiting for the update of the widget
+              Future.delayed(Duration(milliseconds: 0), () {
+                final ssModel =
+                    Provider.of<SliderModel>(context, listen: false);
+                ssModel.primaryColor = this.primaryColor;
+                ssModel.secondaryColor = this.secondaryColor;
+                ssModel.dotsSpace = this.dotsSpace;
+                ssModel.dotsSize = this.dotsSize;
+                ssModel.shape = this.shape;
+                ssModel.secondaryDotsSize = this.secondaryDotsSize;
+                ssModel.slidesPadding = this.slidesPadding;
+                ssModel.scrollDirection = this.scrollDirection;
+              });
 
-            //Widget
-            return Column(
-              children: <Widget>[
-                //Place the dots in the top if dotsOnTop param is true
-                if (dotsOnTop) _Dots(totalSlides: this.slides.length),
-                //Slides using the max of free space
-                Expanded(
-                  child: _Slides(
-                    slides: this.slides,
+              //Widget
+              return Column(
+                children: <Widget>[
+                  //Place the dots in the top if dotsOnTop param is true
+                  if (dotsOnTop && showDots)
+                    _Dots(totalSlides: this.slides.length),
+                  //Slides using the max of free space
+                  Expanded(
+                    child: _Slides(
+                      slides: this.slides,
+                    ),
                   ),
-                ),
-                //Place the dots in the bottom if dotsOnTop param is false
-                if (!dotsOnTop) _Dots(totalSlides: this.slides.length),
-              ],
-            );
-          },
-        )),
-      ),
-    );
-  }
+                  //Place the dots in the bottom if dotsOnTop param is false
+                  if (!dotsOnTop && showDots)
+                    _Dots(totalSlides: this.slides.length),
+                ],
+              );
+            },
+          )),
+        ),
+      );
 }
 
 //Classes
@@ -102,10 +111,11 @@ class __SlidesState extends State<_Slides> {
   Widget build(BuildContext context) => Container(
         //Create a pageview with the slides
         child: PageView.builder(
+          scrollDirection: Provider.of<SliderModel>(context).scrollDirection,
           physics: BouncingScrollPhysics(),
           controller: pageViewController,
           itemCount: widget.slides.length,
-          itemBuilder: (_, i) => _Slide(slide: widget.slides[i]),
+          itemBuilder: (_, i) => _Slide(slide: widget.slides[i], index: i),
         ),
       );
 }
@@ -113,16 +123,18 @@ class __SlidesState extends State<_Slides> {
 class _Slide extends StatelessWidget {
   //Params
   final Widget slide;
+  final int index;
 
   //Constructor
-  const _Slide({this.slide});
+  const _Slide({this.slide, this.index});
 
   @override
   Widget build(BuildContext context) => Container(
         //Design of a slide
         width: double.infinity,
         height: double.infinity,
-        padding: EdgeInsets.all(30),
+        padding:
+            EdgeInsets.all(Provider.of<SliderModel>(context).slidesPadding),
         child: slide,
       );
 }
@@ -194,6 +206,8 @@ class SliderModel with ChangeNotifier {
   BoxShape _shape = BoxShape.circle;
   double _dotsSize = 10;
   double _secondaryDotsSize = 10;
+  double _slidesPadding = 30;
+  Axis _scrollDirection = Axis.horizontal;
 
   double get currentPage => this._currentPage;
   set currentPage(double currentPage) {
@@ -229,5 +243,15 @@ class SliderModel with ChangeNotifier {
   double get secondaryDotsSize => this._secondaryDotsSize;
   set secondaryDotsSize(double secondaryDotsSize) {
     this._secondaryDotsSize = secondaryDotsSize;
+  }
+
+  double get slidesPadding => this._slidesPadding;
+  set slidesPadding(double slidesPadding) {
+    this._slidesPadding = slidesPadding;
+  }
+
+  Axis get scrollDirection => this._scrollDirection;
+  set scrollDirection(Axis scrollDirection) {
+    this._scrollDirection = scrollDirection;
   }
 }

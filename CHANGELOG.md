@@ -1,5 +1,7 @@
-version: 1.0.1+1
+version: 1.0.2+1
 
-## Update (12/26/2020)
+## Update (01/18/2021)
 
-1. Added: Responsive Widget.
+1. Updated: pubspec.yaml (removed cupertino dependency).
+2. Updated: Slideshow Widget (added [slidesPadding, scrollDirection, showDots] params).
+3. Updated: required params in these widgets: Blurred, Deployable and Responsive

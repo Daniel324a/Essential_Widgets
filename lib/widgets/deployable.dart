@@ -12,7 +12,7 @@ class Deployable extends StatelessWidget {
     this.cutInLeft = false,
     this.color = Colors.blue,
     this.iconColor,
-    this.child = const SizedBox(),
+    @required this.child,
     this.alignment = Alignment.centerRight,
     this.shadows = const [
       const BoxShadow(
