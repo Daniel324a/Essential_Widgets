@@ -4,13 +4,13 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class FloatingDrawer extends StatelessWidget {
-  final List<DrawerTile> tiles;
-  final Color color;
-  final Widget separator;
-  final BorderRadiusGeometry borderRadius;
+  final List<DrawerTile>? tiles;
+  final Color? color;
+  final Widget? separator;
+  final BorderRadiusGeometry? borderRadius;
 
   const FloatingDrawer({
-    Key key,
+    Key? key,
     this.tiles,
     this.color,
     this.separator,
@@ -30,7 +30,7 @@ class FloatingDrawer extends StatelessWidget {
 
 class FloatingDrawerBody extends StatefulWidget {
   const FloatingDrawerBody({
-    Key key,
+    Key? key,
   }) : super(key: key);
 
   @override
@@ -39,10 +39,10 @@ class FloatingDrawerBody extends StatefulWidget {
 
 class _FloatingDrawerBodyState extends State<FloatingDrawerBody>
     with SingleTickerProviderStateMixin {
-  List<DrawerTile> list;
+  List<DrawerTile>? list;
 
-  AnimationController _controller;
-  Animation<Offset> _transition;
+  late AnimationController _controller;
+  late Animation<Offset> _transition;
   @override
   void initState() {
     _controller = new AnimationController(
@@ -85,19 +85,19 @@ class _FloatingDrawerBodyState extends State<FloatingDrawerBody>
       child: ListView.separated(
         shrinkWrap: true,
         physics: BouncingScrollPhysics(),
-        itemCount: isRoot ? model.tiles.length : model.tiles.length + 1,
-        separatorBuilder: (_, __) => model.separator,
+        itemCount: isRoot ? model.tiles!.length : model.tiles!.length + 1,
+        separatorBuilder: (_, __) => model.separator!,
         itemBuilder: (_, i) => FadeTransition(
           opacity: _controller,
           child: SlideTransition(
               position: _transition,
               child: isRoot
-                  ? model.safeTiles[i]
+                  ? model.safeTiles![i]
                   : i == 0
                       ? GestureDetector(
                           child: model.backTile,
                           onTap: () => model.tiles = model.safeTiles)
-                      : model.tiles[i - 1]),
+                      : model.tiles![i - 1]),
         ),
         padding: EdgeInsets.all(0),
       ),
@@ -106,16 +106,16 @@ class _FloatingDrawerBodyState extends State<FloatingDrawerBody>
 }
 
 class DrawerTile extends StatelessWidget {
-  final Widget leading, trailing, child;
-  final Function onTap;
+  final Widget? leading, trailing, child;
+  final Function? onTap;
   final List<DrawerTile> children;
 
   const DrawerTile({
-    Key key,
+    Key? key,
     this.leading,
     this.trailing,
     this.onTap,
-    @required this.child,
+    required this.child,
     this.children = const [],
   }) : super(key: key);
 
@@ -126,7 +126,7 @@ class DrawerTile extends StatelessWidget {
       child: ListTile(
         leading: this.leading,
         trailing: this.trailing,
-        onTap: this.onTap,
+        onTap: this.onTap as void Function()?,
         title: this.child,
       ),
     );
@@ -134,11 +134,11 @@ class DrawerTile extends StatelessWidget {
 }
 
 class _FloatingModel extends ChangeNotifier {
-  List<DrawerTile> _tiles, _safeTiles, _rootTiles;
-  DrawerTile _backTile;
-  Color _color;
-  Widget _separator;
-  BorderRadiusGeometry _borderRadius;
+  List<DrawerTile>? _tiles, _safeTiles, _rootTiles;
+  DrawerTile? _backTile;
+  Color? _color;
+  Widget? _separator;
+  BorderRadiusGeometry? _borderRadius;
 
   _FloatingModel({
     tiles = const [],
@@ -162,53 +162,53 @@ class _FloatingModel extends ChangeNotifier {
     createNavigation();
   }
 
-  List<DrawerTile> get tiles => this._tiles;
-  set tiles(List<DrawerTile> newTiles) {
+  List<DrawerTile>? get tiles => this._tiles;
+  set tiles(List<DrawerTile>? newTiles) {
     this._tiles = newTiles;
     notifyListeners();
   }
 
-  List<DrawerTile> get safeTiles => this._safeTiles;
-  set safeTiles(List<DrawerTile> newSafeTiles) {
+  List<DrawerTile>? get safeTiles => this._safeTiles;
+  set safeTiles(List<DrawerTile>? newSafeTiles) {
     this._safeTiles = newSafeTiles;
     notifyListeners();
   }
 
-  List<DrawerTile> get rootTiles => this._rootTiles;
-  set rootTiles(List<DrawerTile> newRootTiles) {
+  List<DrawerTile>? get rootTiles => this._rootTiles;
+  set rootTiles(List<DrawerTile>? newRootTiles) {
     this._rootTiles = newRootTiles;
     notifyListeners();
   }
 
-  Color get color => this._color;
-  set color(Color newColor) {
+  Color? get color => this._color;
+  set color(Color? newColor) {
     this._color = newColor;
     notifyListeners();
   }
 
-  Widget get separator => this._separator;
-  set separator(Widget newSeparator) {
+  Widget? get separator => this._separator;
+  set separator(Widget? newSeparator) {
     this._separator = newSeparator;
     notifyListeners();
   }
 
-  DrawerTile get backTile => this._backTile;
+  DrawerTile? get backTile => this._backTile;
   set backWidget(DrawerTile newbackTile) {
     this._backTile = newbackTile;
     notifyListeners();
   }
 
-  BorderRadiusGeometry get borderRadius => this._borderRadius;
-  set borderRadius(BorderRadiusGeometry newBorderRadius) {
+  BorderRadiusGeometry? get borderRadius => this._borderRadius;
+  set borderRadius(BorderRadiusGeometry? newBorderRadius) {
     this._borderRadius = newBorderRadius;
     notifyListeners();
   }
 
   createNavigation() {
-    this._tiles.asMap().forEach((i, DrawerTile tile) {
+    this._tiles!.asMap().forEach((i, DrawerTile tile) {
       if (tile.children.isEmpty) return;
 
-      tiles.replaceRange(i, i + 1, [prepareTile(tile)]);
+      tiles!.replaceRange(i, i + 1, [prepareTile(tile)]);
     });
   }
 
@@ -226,7 +226,7 @@ class _FloatingModel extends ChangeNotifier {
       leading: tile.leading,
       trailing: tile.trailing,
       onTap: () {
-        if (tile.onTap != null) tile.onTap();
+        if (tile.onTap != null) tile.onTap!();
         tiles = newChildren;
       },
     );

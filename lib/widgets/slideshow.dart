@@ -17,7 +17,7 @@ class Slideshow extends StatelessWidget {
 
   //Constructor
   Slideshow({
-    @required this.slides,
+    required this.slides,
     this.dotsOnTop = false,
     this.primaryColor = Colors.redAccent,
     this.secondaryColor = Colors.grey,
@@ -77,7 +77,7 @@ class Slideshow extends StatelessWidget {
 
 class _Slides extends StatefulWidget {
   //Params
-  final List<Widget> slides;
+  final List<Widget>? slides;
 
   //Constructor
   const _Slides({this.slides});
@@ -114,16 +114,16 @@ class __SlidesState extends State<_Slides> {
           scrollDirection: Provider.of<SliderModel>(context).scrollDirection,
           physics: BouncingScrollPhysics(),
           controller: pageViewController,
-          itemCount: widget.slides.length,
-          itemBuilder: (_, i) => _Slide(slide: widget.slides[i], index: i),
+          itemCount: widget.slides!.length,
+          itemBuilder: (_, i) => _Slide(slide: widget.slides![i], index: i),
         ),
       );
 }
 
 class _Slide extends StatelessWidget {
   //Params
-  final Widget slide;
-  final int index;
+  final Widget? slide;
+  final int? index;
 
   //Constructor
   const _Slide({this.slide, this.index});
@@ -141,7 +141,7 @@ class _Slide extends StatelessWidget {
 
 class _Dots extends StatelessWidget {
   //Params
-  final int totalSlides;
+  final int? totalSlides;
 
   //Constructor
   _Dots({this.totalSlides});
@@ -154,13 +154,13 @@ class _Dots extends StatelessWidget {
         height: 70,
         child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
-            children: List.generate(totalSlides, (i) => _Dot(index: i))),
+            children: List.generate(totalSlides!, (i) => _Dot(index: i))),
       );
 }
 
 class _Dot extends StatelessWidget {
   //Param
-  final int index;
+  final int? index;
 
   //Constructor
   const _Dot({this.index});
@@ -171,7 +171,7 @@ class _Dot extends StatelessWidget {
     final ssModel = Provider.of<SliderModel>(context, listen: false);
 
     //Get the current page of the slider model
-    final currentPageIndex = Provider.of<SliderModel>(context).currentPage;
+    final currentPageIndex = Provider.of<SliderModel>(context).currentPage!;
 
     //Variables
     EdgeInsets space = EdgeInsets.symmetric(horizontal: ssModel.dotsSpace);
@@ -179,9 +179,9 @@ class _Dot extends StatelessWidget {
     double size = ssModel.secondaryDotsSize;
 
     //Condition
-    if (currentPageIndex >= index - 0.5 && currentPageIndex < index + 0.5) {
+    if (currentPageIndex >= index! - 0.5 && currentPageIndex < index! + 0.5) {
       space = EdgeInsets.symmetric(horizontal: ssModel.dotsSpace + 3)
-          .add(EdgeInsets.only(bottom: 2));
+          .add(EdgeInsets.only(bottom: 2)) as EdgeInsets;
       size = ssModel.dotsSize;
       color = ssModel.primaryColor;
     }
@@ -199,7 +199,7 @@ class _Dot extends StatelessWidget {
 
 //Model
 class SliderModel with ChangeNotifier {
-  double _currentPage = 0;
+  double? _currentPage = 0;
   Color _primaryColor = Colors.redAccent;
   Color _secondaryColor = Colors.grey;
   double _dotsSpace = 5;
@@ -209,8 +209,8 @@ class SliderModel with ChangeNotifier {
   double _slidesPadding = 30;
   Axis _scrollDirection = Axis.horizontal;
 
-  double get currentPage => this._currentPage;
-  set currentPage(double currentPage) {
+  double? get currentPage => this._currentPage;
+  set currentPage(double? currentPage) {
     this._currentPage = currentPage;
     notifyListeners();
   }

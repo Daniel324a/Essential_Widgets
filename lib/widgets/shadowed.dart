@@ -2,7 +2,7 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 
-Widget obj;
+Widget? obj;
 
 class Shadowed extends StatelessWidget {
   final Widget child;
@@ -10,7 +10,7 @@ class Shadowed extends StatelessWidget {
   final Color shadowColor;
 
   Shadowed({
-    @required this.child,
+    required this.child,
     this.blurLevel = 10,
     this.shadowColor = Colors.black,
     this.distance = 3,
@@ -44,7 +44,7 @@ class _Shadow extends StatelessWidget {
   final Color shadowColor;
 
   _Shadow({
-    @required this.child,
+    required this.child,
     this.blurLevel = 10,
     this.shadowColor = Colors.black,
     this.distance = 3,

@@ -6,15 +6,15 @@ class Blurred extends StatelessWidget {
   final double width, height, opacity, blur;
   final Widget child;
   final Color accentColor;
-  final BoxDecoration boxDecoration;
+  final BoxDecoration? boxDecoration;
 
   const Blurred({
-    Key key,
+    Key? key,
     this.width = double.infinity,
     this.height = double.infinity,
     this.opacity = 0.0,
     this.blur = 5,
-    @required this.child,
+    required this.child,
     this.accentColor = Colors.transparent,
     this.boxDecoration,
   }) : super(key: key);
@@ -35,7 +35,7 @@ class Blurred extends StatelessWidget {
           child: new Container(
             width: this.width,
             height: this.height,
-            decoration: this.boxDecoration.copyWith(
+            decoration: this.boxDecoration!.copyWith(
                   color: this.accentColor.withOpacity(this.opacity),
                 ),
           ),
