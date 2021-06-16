@@ -14,7 +14,7 @@ class Blurred extends StatelessWidget {
     this.height = double.infinity,
     this.opacity = 0.0,
     this.blur = 5,
-    required this.child,
+    this.child = const SizedBox(),
     this.accentColor = Colors.transparent,
     this.boxDecoration,
   }) : super(key: key);
