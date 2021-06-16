@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 
 class Deployable extends StatelessWidget {
   final bool cutInLeft;
-  final Color color, iconColor;
+  final Color? color, iconColor;
   final Widget child;
   final Alignment alignment;
   final List<BoxShadow> shadows;
 
   const Deployable({
-    Key key,
+    Key? key,
     this.cutInLeft = false,
     this.color = Colors.blue,
     this.iconColor,
@@ -39,17 +39,17 @@ class Deployable extends StatelessWidget {
 
 class _Body extends StatefulWidget {
   final bool cutInLeft;
-  final Color color, backgroundColor;
+  final Color? color, backgroundColor;
   final List<BoxShadow> shadows;
   final Widget child;
 
   const _Body({
-    Key key,
-    @required this.cutInLeft,
-    @required this.color,
-    @required this.backgroundColor,
-    @required this.child,
-    @required this.shadows,
+    Key? key,
+    required this.cutInLeft,
+    required this.color,
+    required this.backgroundColor,
+    required this.child,
+    required this.shadows,
   }) : super(key: key);
 
   @override
@@ -57,7 +57,7 @@ class _Body extends StatefulWidget {
 }
 
 class __BodyState extends State<_Body> {
-  IconData openIcon, closeIcon;
+  IconData? openIcon, closeIcon;
   bool isOpen = false;
   double bodywidth = 60;
 
@@ -108,7 +108,7 @@ class __BodyState extends State<_Body> {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         crossAxisAlignment: CrossAxisAlignment.center,
-        children: widget.cutInLeft ? row.reversed : row,
+        children: widget.cutInLeft ? row.reversed as List<Widget> : row,
       ),
     );
   }

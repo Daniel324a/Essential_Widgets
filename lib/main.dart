@@ -1,5 +1,6 @@
-import 'package:essential_widgets/pages/slideshow.page.dart';
 import 'package:flutter/material.dart';
+
+import 'package:essential_widgets/pages/slideshow.page.dart';
 
 void main() => runApp(MyApp());
 

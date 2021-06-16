@@ -5,7 +5,7 @@ class Responsive extends StatefulWidget {
   final List<double> factors;
 
   const Responsive({
-    Key key,
+    Key? key,
     this.sm = const SizedBox(),
     this.md = const SizedBox(),
     this.lg = const SizedBox(),

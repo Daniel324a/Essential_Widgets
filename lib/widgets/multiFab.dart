@@ -1,21 +1,21 @@
 import 'package:flutter/material.dart';
 
 GlobalKey _key = LabeledGlobalKey("button_icon");
-OverlayEntry _overlayEntry;
-Size buttonSize;
-Offset buttonPosition;
+late OverlayEntry _overlayEntry;
+late Size buttonSize;
+late Offset buttonPosition;
 
 class MultiFab extends StatefulWidget {
-  final Widget unfoldedIcon, foldedIcon, customIcon;
+  final Widget? unfoldedIcon, foldedIcon, customIcon;
   final List<MultiFabItem> children;
   final ShapeBorder shape;
   final Duration animationDuration;
-  final String tooltip;
+  final String? tooltip;
   final Color color;
-  final Function onTap;
+  final Function? onTap;
 
   MultiFab({
-    @required this.children,
+    required this.children,
     this.foldedIcon = const Icon(Icons.apps),
     this.unfoldedIcon = const Icon(Icons.clear),
     this.shape = const CircleBorder(),
@@ -59,7 +59,7 @@ class _MultiFabState extends State<MultiFab> {
       );
 
   findButton() {
-    RenderBox renderBox = _key.currentContext.findRenderObject();
+    RenderBox renderBox = _key.currentContext!.findRenderObject() as RenderBox;
     buttonSize = renderBox.size;
     buttonPosition = renderBox.localToGlobal(Offset.zero);
   }
@@ -67,7 +67,7 @@ class _MultiFabState extends State<MultiFab> {
   void openMenu() {
     findButton();
     _overlayEntry = _overlayEntryBuilder();
-    Overlay.of(context).insert(_overlayEntry);
+    Overlay.of(context)!.insert(_overlayEntry);
     setState(() => isMenuOpen = !isMenuOpen);
   }
 
@@ -86,7 +86,7 @@ class _MultiFabState extends State<MultiFab> {
         child: InkWell(
             borderRadius: BorderRadius.circular(100),
             onTap: () {
-              if (widget.onTap != null) widget.onTap();
+              if (widget.onTap != null) widget.onTap!();
               isMenuOpen ? closeMenu() : openMenu();
             },
             child: Container(
@@ -102,11 +102,11 @@ class _MultiFabState extends State<MultiFab> {
 }
 
 class _Animated extends StatefulWidget {
-  final int index, itemsLenght;
-  final Widget child;
+  final int? index, itemsLenght;
+  final Widget? child;
   final Duration animationDuration;
   _Animated({
-    @required this.animationDuration,
+    required this.animationDuration,
     this.index,
     this.child,
     this.itemsLenght,
@@ -118,17 +118,17 @@ class _Animated extends StatefulWidget {
 
 class __AnimatedState extends State<_Animated>
     with SingleTickerProviderStateMixin {
-  AnimationController controller;
-  Animation<double> opacity;
-  Animation<double> moveUp;
+  late AnimationController controller;
+  late Animation<double> opacity;
+  late Animation<double> moveUp;
 
   @override
   void initState() {
     controller = new AnimationController(
         vsync: this, duration: widget.animationDuration);
 
-    int index = widget.index;
-    int itemsLenght = widget.itemsLenght;
+    int index = widget.index!;
+    int itemsLenght = widget.itemsLenght!;
 
     Interval interval = Interval(
       index * (1 / itemsLenght),
@@ -160,7 +160,7 @@ class __AnimatedState extends State<_Animated>
     controller.forward();
     return AnimatedBuilder(
         animation: controller,
-        builder: (BuildContext buildContext, Widget child) => Opacity(
+        builder: (BuildContext buildContext, Widget? child) => Opacity(
               opacity: opacity.value,
               child: Transform.translate(
                 offset: Offset(0, moveUp.value),
@@ -175,10 +175,10 @@ class MultiFabItem extends StatelessWidget {
   final ShapeBorder shape;
   final Widget child;
   final Color color;
-  final String tooltip;
+  final String? tooltip;
 
   const MultiFabItem({
-    @required this.onPressed,
+    required this.onPressed,
     this.shape = const CircleBorder(),
     this.child = const Icon(Icons.brightness_1, color: Colors.white, size: 10),
     this.color = Colors.blue,
@@ -190,7 +190,7 @@ class MultiFabItem extends StatelessWidget {
     return FloatingActionButton(
       tooltip: tooltip,
       mini: true,
-      onPressed: onPressed,
+      onPressed: onPressed as void Function()?,
       child: child,
       shape: shape,
       backgroundColor: color,
